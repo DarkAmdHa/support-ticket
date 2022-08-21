@@ -1,4 +1,4 @@
-const asyncHanler = require('express-async-handler')
+const asyncHandler = require('express-async-handler')
 
 const User = require('../models/userModel')
 const Ticket = require('../models/ticketModel')
@@ -6,7 +6,7 @@ const Ticket = require('../models/ticketModel')
 // @desc    Get user tickets
 //@route    GET /api/tickets/
 //@access   Private
-const getTickets = asyncHanler(async (req, res) => {
+const getTickets = asyncHandler(async (req, res) => {
   //Get user using id and the jwt
   const user = User.findById(req.user.id)
 
@@ -16,13 +16,13 @@ const getTickets = asyncHanler(async (req, res) => {
   }
 
   const tickets = await Ticket.find({ user: req.user.id })
-  res.status(200).json(ticket)
+  res.status(200).json(tickets)
 })
 
 // @desc    Get user ticket
 //@route    GET /api/tickets/:id
 //@access   Private
-const getTicket = asyncHanler(async (req, res) => {
+const getTicket = asyncHandler(async (req, res) => {
   //Get user using id and the jwt
   const user = User.findById(req.user.id)
 
@@ -48,7 +48,7 @@ const getTicket = asyncHanler(async (req, res) => {
 // @desc    Create new ticket
 //@route    POST /api/tickets/
 //@access   Private
-const createTicket = asyncHanler(async (req, res) => {
+const createTicket = asyncHandler(async (req, res) => {
   const { product, description } = req.body
   if (!product || !description) {
     res.status(400)
@@ -75,7 +75,7 @@ const createTicket = asyncHanler(async (req, res) => {
 // @desc    Delete ticket
 //@route    DELETE /api/tickets/:id
 //@access   Private
-const deleteTicket = asyncHanler(async (req, res) => {
+const deleteTicket = asyncHandler(async (req, res) => {
   //Get user using id and the jwt
   const user = User.findById(req.user.id)
 
@@ -103,7 +103,7 @@ const deleteTicket = asyncHanler(async (req, res) => {
 // @desc    Update ticket
 //@route    UPDATE /api/tickets/:id
 //@access   Private
-const updateTicket = asyncHanler(async (req, res) => {
+const updateTicket = asyncHandler(async (req, res) => {
   //Get user using id and the jwt
   const user = User.findById(req.user.id)
 
